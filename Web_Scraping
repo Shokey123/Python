@@ -1,0 +1,43 @@
+import requests
+from bs4 import BeautifulSoup
+
+response = requests.get("https://www.flipkart.com/search?q=laptop&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off")
+print(response)
+
+print(response.status_code)
+
+print(response.content)
+
+soup = BeautifulSoup(response.content,"html.parser")
+print(soup)
+
+#title = soup.find("div", attrs = {"_3wU53n"})
+#print(title.text)
+
+#titles = soup.find_all("div", attrs = {"_3wU53n"})
+
+#for title in titles:
+#    print(title.text)
+    
+carts = soup.find_all("div", attrs = {"class":"_1-2Iqu row"})
+for cart in carts:
+    
+    title = cart.find("div", attrs = {"_3wU53n"})
+    price = soup.find("div", attrs = {"_1vC4OE _2rQ-NK"})
+    rating = soup.find("div", attrs = {"hGSR34"})
+    review = soup.find("div", attrs = {"qwjRop"})
+    
+    
+    print("Laptop: {} \n price: {} \n rating: {} \n Review: {} \n\n".format(title.text, price.text, rating.text, review.text))
+    
+
+    
+#     print("{} {} {} {} ".format(title.text, price.text, rating.text, review.text))
+    
+    
+    
+    
+    
+    
+    
+
